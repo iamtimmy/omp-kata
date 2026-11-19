@@ -9,7 +9,7 @@ import { join, resolve } from "node:path";
 import { createKataExtension, type KataExtensionOptions } from "../../src/index";
 
 export const FAKE_KATA = resolve(import.meta.dir, "../fixtures/fake-kata");
-export const REAL_KATA = process.env.KATA_BIN ?? join(process.env.HOME ?? "", ".local/bin/kata");
+export const REAL_KATA = process.env.KATA_BIN ?? Bun.which("kata") ?? join(process.env.HOME ?? "", ".local/bin/kata");
 
 export function tempDir(prefix = "omp-kata-unit-"): string {
 	return realpathSync(mkdtempSync(join(tmpdir(), prefix)));
